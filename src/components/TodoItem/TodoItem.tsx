@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { Button, IconButton, TextField, Box, Typography } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 
 interface TodoItemProps {
     todo: {
@@ -43,28 +47,43 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, editTodo, deleteT
     };
 
     return (
-        <li style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>
+        <Box display="flex" alignItems="center" justifyContent="space-between" width="100%">
             {isEditing ? (
-            <>
-                <input 
-                type="text" 
-                value={newTitle} 
-                onChange={handleChange} 
-                onBlur={handleSave}
-                autoFocus 
+                <Box display="flex" alignItems="center">
+                <TextField
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                    value={newTitle}
+                    onChange={handleChange}
+                    onBlur={handleSave}
+                    autoFocus
                 />
-                <button onClick={handleSave}>Save</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </>
+                <Button onClick={handleSave}>Save</Button>
+                <Button onClick={handleCancel}>Cancel</Button>
+                </Box>
             ) : (
-            <>
-                {todo.title} (Created at: {new Date(todo.createdAt).toLocaleString()})
-                <button onClick={handleToggle}>Toggle</button>
-                <button onClick={handleEdit}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-            </>
+                <>
+                <Typography
+                    variant="body1"
+                    style={{ textDecoration: todo.done ? 'line-through' : 'none' }}
+                >
+                    {todo.title}
+                </Typography>
+                <Box>
+                    <IconButton onClick={handleToggle} color="primary">
+                        <DoneOutlinedIcon />
+                    </IconButton>
+                    <IconButton onClick={handleEdit} color="secondary">
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={handleDelete}>
+                        <DeleteIcon />
+                    </IconButton>
+                </Box>
+                </>
             )}
-        </li>
+        </Box>
     );
 };
 

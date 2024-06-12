@@ -16,9 +16,9 @@ const loadTodosFromLocalStorage = (): Todo[] => {
         return JSON.parse(savedTodos);
     }
     return [
-        { id: uuidv4(), title: 'Learn TypeScript', createdAt: Date.now(), done: false },
-        { id: uuidv4(), title: 'Build a ToDo App', createdAt: Date.now(), done: false },
-        { id: uuidv4(), title: 'Explore Redux Toolkit', createdAt: Date.now(), done: false },
+        { id: uuidv4(), title: 'Задача 1', createdAt: Date.now(), done: false },
+        { id: uuidv4(), title: 'Задача 2', createdAt: Date.now(), done: false },
+        { id: uuidv4(), title: 'Задача 3', createdAt: Date.now(), done: false },
     ];
 };
 
@@ -39,7 +39,8 @@ export const todosSlice = createSlice({
             createdAt: Date.now(),
             done: false,
             };
-            state.push(newTodo);
+            // state.push(newTodo); //в конец
+            state.unshift(newTodo); //в начало
             saveTodosToLocalStorage(state);
         },
         toggleTodo: (state, action: PayloadAction<string>) => {

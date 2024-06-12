@@ -6,3 +6,4 @@
 - Redux Toolkit;
 - TypeScript;
 - React Router.
+- MUI - библиотека компонентов

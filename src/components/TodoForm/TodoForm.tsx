@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../services/todosSlice';
+import { TextField, Button, Box } from '@mui/material';
 
 const TodoForm: React.FC = () => {
     const [title, setTitle] = useState('');
@@ -18,10 +19,27 @@ const TodoForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={title} onChange={handleChange} />
-            <button type="submit">Add Todo</button>
-        </form>
+        <Box 
+            component="form" 
+            onSubmit={handleSubmit}
+            display="flex"
+            alignItems="center"
+            mb={2}
+        >
+            <TextField
+                label="What To Do?"
+                variant="outlined"
+                size="small"
+                value={title}
+                onChange={handleChange}
+                sx={{ marginRight: 2,
+                    width: '500px',
+                }}
+            />
+            <Button type="submit" variant="contained">
+                Add Todo
+            </Button>
+        </Box>
     );
 };
 
