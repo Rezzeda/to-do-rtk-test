@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../services/store';
-import { toggleTodo, editTodo, deleteTodo } from '../../services/todosSlice';
+import { toggleTodo, editTodo, deleteTodo, Todo } from '../../services/todosSlice';
 import TodoItem from '../TodoItem/TodoItem';
+import { Button, List, ListItem, Container, Typography, Box } from '@mui/material';
+
 
 type FilterType = 'all' | 'completed' | 'incomplete';
 
@@ -34,30 +36,37 @@ const TodoList: React.FC = () => {
     };
 
     return (
-        <div>
-        <div>
-            <button onClick={() => handleSetFilter('all')} style={{ marginRight: '10px' }}>
-            All
-            </button>
-            <button onClick={() => handleSetFilter('completed')} style={{ marginRight: '10px' }}>
-            Completed
-            </button>
-            <button onClick={() => handleSetFilter('incomplete')} style={{ marginRight: '10px' }}>
-            Incomplete
-            </button>
-        </div>
-        <ul>
-            {filteredTodos.map(todo => (
-            <TodoItem
-                key={todo.id}
-                todo={todo}
-                toggleTodo={handleToggleTodo}
-                editTodo={handleEditTodo}
-                deleteTodo={handleDeleteTodo}
-            />
-            ))}
-        </ul>
-        </div>
+        <Container>
+        <Box mb={2}>
+            <Button variant="contained" onClick={() => handleSetFilter('all')} sx={{ marginRight: 2 }}>
+                All
+            </Button>
+            <Button variant="contained" onClick={() => handleSetFilter('completed')} sx={{ marginRight: 2 }}>
+                Completed
+            </Button>
+            <Button variant="contained" onClick={() => handleSetFilter('incomplete')}>
+                Incomplete
+            </Button>
+        </Box>
+        {filteredTodos.length === 0 ? (
+            <Typography variant="h6" align="center" color="textSecondary">
+                Nothing to do
+            </Typography>
+            ) : (
+            <List>
+                {filteredTodos.map((todo: Todo) => (
+                <ListItem key={todo.id}>
+                    <TodoItem
+                    todo={todo}
+                    toggleTodo={handleToggleTodo}
+                    editTodo={handleEditTodo}
+                    deleteTodo={handleDeleteTodo}
+                    />
+                </ListItem>
+                ))}
+            </List>
+            )}
+        </Container>
     );
 };
 
