@@ -6,7 +6,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import { Button, List, ListItem, Container, Typography, Box } from '@mui/material';
 
 
-type FilterType = 'all' | 'completed' | 'incomplete';
+type FilterType = 'all' | 'completed' | 'active';
 
 const TodoList: React.FC = () => {
     const todos = useSelector((state: RootState) => state.todos);
@@ -27,7 +27,7 @@ const TodoList: React.FC = () => {
 
     const filteredTodos = todos.filter(todo => {
         if (filter === 'completed') return todo.done;
-        if (filter === 'incomplete') return !todo.done;
+        if (filter === 'active') return !todo.done;
         return true; // 'all'
     });
 
@@ -44,8 +44,8 @@ const TodoList: React.FC = () => {
             <Button variant="contained" onClick={() => handleSetFilter('completed')} sx={{ marginRight: 2 }}>
                 Completed
             </Button>
-            <Button variant="contained" onClick={() => handleSetFilter('incomplete')}>
-                Incomplete
+            <Button variant="contained" onClick={() => handleSetFilter('active')}>
+                Active
             </Button>
         </Box>
         {filteredTodos.length === 0 ? (
