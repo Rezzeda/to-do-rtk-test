@@ -2,7 +2,7 @@
 
 Тестовое задание для Mindbox
 
-Посмотреть [To Do App](ссылка)
+Посмотреть [To Do App](https://rezzeda.github.io/to-do-rtk-test/)
 
 ## Используемые технологии
 
